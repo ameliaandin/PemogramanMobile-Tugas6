@@ -17,7 +17,7 @@ class EventAdapter(
         val tvName: TextView = view.findViewById(R.id.tvEventName)
         val tvDate: TextView = view.findViewById(R.id.tvEventDate)
         val tvLocation: TextView = view.findViewById(R.id.tvEventLocation)
-        val tvSpecialization: TextView = view.findViewById(R.id.tvEventPrice) // Reuse the same ID or change in XML
+        val tvPrice: TextView = view.findViewById(R.id.tvEventPrice)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,7 +31,7 @@ class EventAdapter(
         holder.tvName.text = event.name
         holder.tvDate.text = "📅 ${event.date}"
         holder.tvLocation.text = "📍 ${event.location}"
-        holder.tvSpecialization.text = "🩺 ${event.specialization}"
+        holder.tvPrice.text = event.getFormattedPrice()
 
         holder.card.setOnClickListener {
             onItemClick(event)

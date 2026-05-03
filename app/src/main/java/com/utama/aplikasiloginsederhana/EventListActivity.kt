@@ -12,11 +12,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class EventListActivity : AppCompatActivity() {
     // Data statis (hardcoded)
     private val eventList = listOf(
-        Event(1, "Dr. Kaniz Pratama", "15 Mei 2026", "Klinik Widyatama", "Spesialis Penyakit Dalam"),
-        Event(2, "Dr. Madinatul Munyah", "20 Mei 2026", "Klinik Widyatama", "Spesialis Anak"),
-        Event(3, "Dr. Asep Ama Rosmana", "25 Mei 2026", "Klinik Widyatama", "Spesialis Bedah"),
-        Event(4, "Dr. Egilaurenzi", "1 Juni 2026", "Klinik Widyatama", "Spesialis Saraf"),
-        Event(5, "Dr. Selpiana", "10 Juni 2026", "Klinik Widyatama", "Spesialis Jantung")
+        Event(1, "Jadwal Dr. Kaniz Pratama", "15 Mei 2026", "Klinik Widyatama", 50000),
+        Event(2, "Jadwal Dr. Madinatul Munyah", "20 Mei 2026", "Klinik Widyatama", 75000),
+        Event(3, "Jadwal Dr. Asep Ama Rosmana", "25 Mei 2026", "Klinik Widyatama", 60000),
+        Event(4, "Jadwal Dr. Egilaurenzi", "1 Juni 2026", "Klinik Widyatama", 80000),
+        Event(5, "Jadwal Dr. Selpiana", "10 Juni 2026", "Klinik Widyatama", 55000)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

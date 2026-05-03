@@ -260,7 +260,7 @@
                                 android:id="@+id/tvInfoPhone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="+6289656658454"
+                                android:text="+62 896-5665-8454"
                                 android:textSize="14sp"
                                 android:textColor="#333"/>
                         </LinearLayout>
@@ -284,7 +284,7 @@
                 android:layout_marginBottom="16dp"
                 app:cornerRadius="8dp"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                app:strokeColor="#F44336"
+                app:strokeColor="#F44F36"
                 android:textColor="#F44336"/>
         </LinearLayout>
     </LinearLayout>

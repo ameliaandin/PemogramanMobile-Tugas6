@@ -17,23 +17,28 @@ class LoginActivity : AppCompatActivity() {
         val etPassword = findViewById<EditText>(R.id.etPassword)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val btnRegister = findViewById<Button>(R.id.btnRegister)
+        val sessionManager = SessionManager(this)
+
+        if (sessionManager.isLoggedIn()) {
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+        }
 
         btnLogin.setOnClickListener {
             val username = etUsername.text.toString().trim()
             val password = etPassword.text.toString().trim()
 
-            // f) Validasi Input: Pastikan tidak kosong
             if (username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Username dan Password tidak boleh kosong!", Toast.LENGTH_SHORT).show()
             } else {
+                sessionManager.saveLoginSession(username)
                 Toast.makeText(this, "Login Berhasil!", Toast.LENGTH_SHORT).show()
                 
-                // Langsung ke HomeActivity
                 val intent = Intent(this, HomeActivity::class.java)
                 intent.putExtra("username", username)
                 intent.putExtra("email", "$username@widyatama.ac.id")
                 startActivity(intent)
-                finish() // Selesai LoginActivity
+                finish()
             }
         }
 

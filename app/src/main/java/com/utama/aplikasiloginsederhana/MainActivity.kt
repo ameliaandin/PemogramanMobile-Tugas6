@@ -1,39 +1,49 @@
 package com.utama.aplikasiloginsederhana
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var sessionManager: SessionManager
+    private lateinit var btnLogin: Button
+
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        sessionManager = SessionManager(this)
+        if (sessionManager.isLoggedIn()) {
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+            return
         }
 
-        // Inisialisasi komponen
-        val tvUsernameResult = findViewById<TextView>(R.id.tvUsernameResult)
-        val btnLogin = findViewById<Button>(R.id.btnLogin)
-        
-        // Mengambil data dari intent
-        val username = intent.getStringExtra("username")
-        tvUsernameResult.text = username ?: "Guest"
+        btnLogin = findViewById(R.id.btnLogin)
+        val etUsername = findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.etUsername)
+        val etPassword = findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.etPassword)
 
-        // Aksi tombol untuk masuk ke Beranda (Home)
         btnLogin.setOnClickListener {
+            val username = etUsername.text.toString().trim()
+            val password = etPassword.text.toString().trim()
+
+            if (username.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Username dan Password tidak boleh kosong!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            
+            sessionManager.saveLoginSession(username = username)
+            Toast.makeText(this, "Selamat datang, $username!", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, HomeActivity::class.java)
             intent.putExtra("username", username)
             startActivity(intent)
+            finish()
         }
     }
 }
